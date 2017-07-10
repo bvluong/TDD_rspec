@@ -166,3 +166,29 @@ class WordChain
   end
 
 end
+
+def word_break(s,word_dict)
+  ans = []
+  temp_arr = []
+  word_dict.each_with_index do |word1,idx|
+    temp_str = s
+    if /\A#{word1}/.match(temp_str)
+      temp_arr = [word1]
+      temp_str = temp_str[word1.length..-1]
+    else
+      break
+    end
+    word_dict.drop(idx+1).each do |word2|
+      if temp_str.length == 0
+        ans << temp_arr
+        break
+      elsif /\A#{word2}/.match(temp_str)
+        temp_arr << word2
+        temp_str = temp_str[word2.length..-1]
+      end
+    end
+    ans << temp_arr
+  end
+  ans.map {|sen| sen.join(" ")}
+  ans
+end
