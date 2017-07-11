@@ -167,28 +167,65 @@ class WordChain
 
 end
 
+# def word_break(s,word_dict)
+#   ans = []
+#   temp_arr = []
+#   word_dict.each_with_index do |word1,idx|
+#     temp_str = s
+#     if /\A#{word1}/.match(temp_str)
+#       temp_arr = [word1]
+#       temp_str = temp_str[word1.length..-1]
+#     else
+#       break
+#     end
+#     word_dict.drop(idx+1).each do |word2|
+#       if temp_str.length == 0
+#         ans << temp_arr
+#         break
+#       elsif /\A#{word2}/.match(temp_str)
+#         temp_arr << word2
+#         temp_str = temp_str[word2.length..-1]
+#       end
+#     end
+#     ans << temp_arr
+#   end
+#   ans.map {|sen| sen.join(" ")}
+#   ans
+# end
+
 def word_break(s,word_dict)
-  ans = []
-  temp_arr = []
-  word_dict.each_with_index do |word1,idx|
-    temp_str = s
-    if /\A#{word1}/.match(temp_str)
-      temp_arr = [word1]
-      temp_str = temp_str[word1.length..-1]
+
+  cache = {}
+  ans = word_helper(s,word_dict,cache)
+  return ans.sort
+end
+
+def word_helper(s,word_dict,cache)
+  return cache[s] if cache[s]
+  return [] if s.length < 1
+  res = []
+  word_dict.each do |word|
+    next unless /\A#{word}/.match(s)
+    if word.length == s.length
+      res.push(word)
     else
-      break
-    end
-    word_dict.drop(idx+1).each do |word2|
-      if temp_str.length == 0
-        ans << temp_arr
-        break
-      elsif /\A#{word2}/.match(temp_str)
-        temp_arr << word2
-        temp_str = temp_str[word2.length..-1]
+      rest = word_helper(s[word.length..-1], word_dict, cache)
+      rest.each do |item|
+        item = word + ' ' + item
+        res.push(item)
       end
     end
-    ans << temp_arr
   end
-  ans.map {|sen| sen.join(" ")}
-  ans
+  cache[s] = res
+  return res
+end
+
+def max_profit(prices)
+  max = 0
+  prices.each_with_index do |price,idx|
+    break if idx == prices.length-1
+    diff = prices.drop(idx+1).max - price
+    max = diff if diff > max
+  end
+  max
 end
