@@ -222,9 +222,10 @@ end
 
 def max_profit(prices)
   max = 0
-  prices.each_with_index do |price,idx|
-    break if idx == prices.length-1
-    diff = prices.drop(idx+1).max - price
+  min_stock = +1.0/0.0
+  prices.each do |price|
+    min_stock = price if price < min_stock
+    diff = price - min_stock
     max = diff if diff > max
   end
   max

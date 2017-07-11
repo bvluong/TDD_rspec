@@ -14,8 +14,19 @@ describe "word_break" do
 end
 
 describe "max_profit" do
-  it "construct a sentence where each word is a valid dictionary word" do
+  it "return maximum value for buying and selling stock - 1 transaction" do
     result1 = max_profit([7, 1, 5, 3, 6, 4])
+    result2 = max_profit([2,1,2,0,1])
     expect(result1).to eq(5)
+    expect(result2).to eq(1)
+    end
+end
+
+describe "max_profit2" do
+  it "return maximum value for buying and selling stock - unlimited transaction" do
+    result1 = max_profit([7, 1, 5, 3, 6, 4])
+    result2 = max_profit([2,1,2,0,1])
+    expect(result1).to eq(5)
+    expect(result2).to eq(1)
     end
 end
