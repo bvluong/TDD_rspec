@@ -23,10 +23,12 @@ describe "max_profit" do
 end
 
 describe "max_profit2" do
-  it "return maximum value for buying and selling stock - unlimited transaction" do
-    result1 = max_profit([7, 1, 5, 3, 6, 4])
-    result2 = max_profit([2,1,2,0,1])
-    expect(result1).to eq(5)
-    expect(result2).to eq(1)
+  it "return maximum value for buying and selling stock - twice transaction" do
+    result1 = max_profit2([7, 1, 5, 3, 6, 4])
+    result2 = max_profit2([2, 30, 15, 10, 8, 25, 80])
+    result3 = max_profit2([12,11,13,9,12,8,14,13,15])
+    expect(result1).to eq(7)
+    expect(result2).to eq(100)
+    expect(result3).to eq(10)
     end
 end

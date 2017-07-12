@@ -230,3 +230,54 @@ def max_profit(prices)
   end
   max
 end
+
+# def max_profit2(prices)
+#   profit = 0
+#   min_stock = +1.0/0.0
+#   temp_arr = [prices.first]
+#   prices.drop(1).each do |price|
+#     if temp_arr.length < 1
+#       temp_arr.push(price)
+#     elsif price < temp_arr[-1]
+#       if temp_arr.length >= 2
+#         profit += temp_arr[-1] - temp_arr[-2]
+#         temp_arr.pop
+#         temp_arr.pop
+#       else
+#         temp_arr.pop
+#       end
+#       temp_arr.push(price)
+#     elsif price > temp_arr[-1]
+#       temp_arr.pop if temp_arr.length > 1
+#       temp_arr.push(price)
+#     end
+#   end
+#   if temp_arr.length > 1
+#     remain = temp_arr[-1] - temp_arr[-2]
+#     profit += remain if remain > 0
+#   end
+#   profit
+# end
+
+def max_profit2(prices)
+  max_profit, min_price = 0, +1.0/0.0
+  profits_array = [0]*prices.length
+  prices.each_with_index do |price,i|
+    min_price = [price, min_price].min
+    max_profit = [max_profit, price-min_price].max
+    profits_array[i] = max_profit
+  end
+  max_profit, max_price = 0, -1.0/0.0
+  reverse_max_profit = [0]*prices.length
+  prices.reverse.each_with_index do |price,i|
+    max_price = [price,max_price].max
+    max_profit = [max_profit, max_price-price].max
+    reverse_max_profit[prices.length-i-1] = max_profit
+  end
+  counter = 0
+  max_profit = -1.0/0.0
+  profits_array.each_with_index do |el,idx|
+    max_profit = [max_profit,el+reverse_max_profit[idx]].max
+  end
+  max_profit
+end
