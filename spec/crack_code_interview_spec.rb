@@ -18,3 +18,10 @@ describe "find_anagram" do
     expect(result2).to eq(2)
   end
 end
+
+describe "find_frac" do
+  it "returns reduced factor of numerator and denomator" do
+    result1 = find_frac([['722','148'],['360','176']])
+    expect(result1).to eq(Rational(2818,407))
+  end
+end
