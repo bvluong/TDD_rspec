@@ -21,3 +21,7 @@ def even_odd(a)
   end
   return a
 end
+
+def edit_distance(word1,word2)
+  
+end

@@ -11,6 +11,10 @@ end
 describe "edit_distance" do
   it "return minimum of updates to match two strings" do
     result1 = edit_distance("sunday","saturday")
+    result2 = edit_distance("","cat")
+    result3 = edit_distance("a","ab")
     expect(result1).to eq(3)
+    expect(result2).to eq(3)
+    expect(result2).to eq(1)
   end
 end
