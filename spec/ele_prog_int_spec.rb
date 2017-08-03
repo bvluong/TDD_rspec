@@ -15,6 +15,6 @@ describe "edit_distance" do
     result3 = edit_distance("a","ab")
     expect(result1).to eq(3)
     expect(result2).to eq(3)
-    expect(result2).to eq(1)
+    expect(result3).to eq(1)
   end
 end

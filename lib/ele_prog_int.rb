@@ -23,5 +23,23 @@ def even_odd(a)
 end
 
 def edit_distance(word1,word2)
-  
+  return word2.length if word1.empty?
+  return word1.length if word2.empty?
+  len1, len2 = word1.length, word2.length
+  dict_arr = Array.new(len2+1) { Array.new(len1+1)}
+
+  (0..len1).step { |num| dict_arr[0][num] = num }
+  (0..len2).step { |num| dict_arr[num][0] = num }
+
+  word2.split("").each_index do |idx2|
+    word1.split("").each_index do |idx1|
+      if word1[idx1] == word2[idx2]
+        dict_arr[idx2+1][idx1+1] = dict_arr[idx2][idx1]
+      else
+        dict_arr[idx2+1][idx1+1] = [dict_arr[idx2][idx1],dict_arr[idx2][idx1+1],dict_arr[idx2+1][idx1]].min  + 1
+      end
+    end
+  end
+  p dict_arr[-1][-1]
+
 end
