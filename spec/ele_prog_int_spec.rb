@@ -20,8 +20,8 @@ describe "edit_distance" do
 end
 
 describe "matrix_in_spiral_order" do
-  it "given a 2d array return the spiral order"
-    result1 = matrix_in_spiral_order([[1,2,3][4,5,6][7,8,9]])
+  it "given a 2d array return the spiral order" do
+    result1 = matrix_in_spiral_order([[1,2,3],[4,5,6],[7,8,9]])
     result2 = matrix_in_spiral_order(
     [[1,2,3,4],
     [5,6,7,8],
@@ -29,4 +29,5 @@ describe "matrix_in_spiral_order" do
     [13,14,15,16]])
     expect(result1).to eq([1,2,3,6,9,8,7,4,5])
     expect(result2).to eq([1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10])
+  end
 end

@@ -43,3 +43,22 @@ def edit_distance(word1,word2)
   p dict_arr[-1][-1]
 
 end
+
+def matrix_in_spiral_order(arr)
+  return [] if arr.empty?
+  return arr[0] if arr.length <= 1
+  spir_arr = []
+  spir_arr += arr.shift
+  arr.each do |sub_arr|
+    spir_arr << sub_arr.pop
+  end
+  p spir_arr
+  p arr
+  spir_arr += arr.pop.reverse
+  rev_arr = []
+  arr.each do |sub_arr|
+    rev_arr << sub_arr.shift
+  end
+  spir_arr += rev_arr.reverse
+  spir_arr + matrix_in_spiral_order(arr)
+end
